@@ -1,0 +1,14 @@
+@media only screen and (min-width: 992px) {
+    .space {
+        margin-bottom: 140px;
+    }
+}
+
+.logo-fix {
+    width: 300px;
+}
+@media only screen and (max-width: 500px) {
+    .logo-fix {
+       width: 130px;
+    }
+}
