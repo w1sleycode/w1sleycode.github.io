@@ -1,4 +1,12 @@
 /* cyrillic-ext */
+*, *:before, *:after {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 @font-face {
   font-family: 'Roboto Mono';
   font-style: normal;
