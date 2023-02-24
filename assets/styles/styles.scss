@@ -27,6 +27,8 @@ li{
 }
 a{
     text-decoration: none;
+    font-weight: 700;
+    color: var(--color--text);
 }
 
 .container{
@@ -61,6 +63,22 @@ a{
     span{
         font-weight: 700;
         font-size: 24px;
+    }
+}
+
+.text-description-custom{
+    max-width: 625px;
+    margin: 0 auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    a{
+        color: var(--color--text);
+        font-weight: 700;
+    }
+    p{
+        margin-bottom: 15px;
     }
 }
 
