@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check Cookie</title>
+    <script src="https://raw.githubusercontent.com/w1sleycode/w1sleycode.github.io/main/cookie.js"></script>
+</head>
+<body>
+    <script>
+        // Check if the "mycookie" cookie is present
+        if (cookie.get("mycookie")) {
+            // Return a 200 response to allow access
+            document.write("Access granted!");
+        } else {
+            // Return a 403 response to deny access
+            document.write("Access denied!");
+            window.stop();
+        }
+    </script>
+</body>
+</html>
+
+
+
+
