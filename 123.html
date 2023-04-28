@@ -211,53 +211,53 @@
           });
       }
       function initiateChart(divid) {
-        mychart = Highcharts.chart("container", {
-          chart: { type: "area", backgroundColor: "#131515" },
-          title: { text: "CUSTOM + HTTP-DDOS (HIGH) + RATELIMIT 32" },
-          xAxis: {
+    mychart = new Highcharts.Chart({
+        chart: { type: "area", backgroundColor: "#131515" },
+        title: { text: "CUSTOM + HTTP-DDOS (HIGH) + RATELIMIT 32" },
+        xAxis: {
             type: "datetime",
             dateTimeLabelFormats: { day: "%a" },
             gridLineColor: "#7DE2D1",
             labels: { style: { color: "#7DE2D1" } },
-          },
-          yAxis: {
+        },
+        yAxis: {
             allowDecimals: false,
             labels: {
-              formatter: function () {
-                if (this.value > 1000) {
-                  return this.value / 1000 + "k r/s";
-                } else {
-                  return this.value + " r/s";
-                }
-              },
+                formatter: function () {
+                    if (this.value > 1000) {
+                        return this.value / 1000 + "k r/s";
+                    } else {
+                        return this.value + " r/s";
+                    }
+                },
             },
-          },
-          tooltip: { pointFormat: "Requests: {point.y:,.0f}" },
-          colors: [
+        },
+        tooltip: { pointFormat: "Requests: {point.y:,.0f}" },
+        colors: [
             { linearGradient: [0, 0, 0, 0], stops: [[0, "#339989"]] },
-          ],
-          plotOptions: {
+        ],
+        plotOptions: {
             area: {
-              fillColor: {
-                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                stops: [
-                  [0, "#7DE2D1"],
-                  [1, Highcharts.Color("#7DE2D1").setOpacity(0).get("rgba")],
-                ],
-              },
-              pointStart: 1940,
-              marker: {
-                enabled: true,
-                symbol: "circle",
-                radius: 3,
-                states: { hover: { enabled: true } },
-              },
+                fillColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, "#7DE2D1"],
+                        [1, Highcharts.Color("#7DE2D1").setOpacity(0).get("rgba")],
+                    ],
+                },
+                pointStart: 1940,
+                marker: {
+                    enabled: true,
+                    symbol: "circle",
+                    radius: 3,
+                    states: { hover: { enabled: true } },
+                },
             },
-          },
-          series: [{ name: "Bypassed", data: [] }],
-        });
-      }
+        },
+        series: [{ name: "Bypassed", data: [] }],
+        renderTo: divid,
     });
+}
   </script>
   <script>
     
