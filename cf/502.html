@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
-    <title>SKL | 502</title>
+    <title id="dynamicTitle"></title>
+<script>
+  var currentUrl = window.location.href;
+  var urlObject = new URL(currentUrl);
+  var domainName = urlObject.hostname;
+  document.getElementById("dynamicTitle").innerHTML = domainName + " | PREFW";
+</script>
 </head>
 <body>
     <div class="top-line"></div>
