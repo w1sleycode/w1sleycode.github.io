@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Слишком много попыток</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--dark-1: #121212;
+				--dark-2: #1a1a1a;
+				--dark-3: #000000;
+				--text-color: #e0e0e0;
+				--highlight-color: #ffffff;
+				--accent-color: #3498db;
+				--glass-bg: rgba(28, 28, 28, 0.3);
+				--glass-border: rgba(255, 255, 255, 0.1);
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Inter', sans-serif;
+				color: var(--text-color);
+				background: linear-gradient(
+					45deg,
+					var(--dark-3),
+					var(--dark-1),
+					var(--dark-2)
+				);
+				background-size: 400% 400%;
+				animation: gradientBG 15s ease infinite;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				overflow: hidden;
+			}
+			@keyframes gradientBG {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			}
+			.glass-container {
+				width: 90%;
+				max-width: 450px;
+				padding: 40px;
+				background: var(--glass-bg);
+				border-radius: 20px;
+				border: 1px solid var(--glass-border);
+				backdrop-filter: blur(10px);
+				-webkit-backdrop-filter: blur(10px);
+				box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+				text-align: center;
+				transition: transform 0.4s ease, box-shadow 0.4s ease;
+			}
+			.glass-container:hover {
+				transform: scale(1.05);
+				box-shadow: 0 16px 45px 0 rgba(0, 0, 0, 0.45);
+			}
+			.icon {
+				font-size: 56px;
+				line-height: 1;
+				margin-bottom: 10px;
+				color: var(--accent-color);
+			}
+			h1#title {
+				font-size: 28px;
+				font-weight: 600;
+				margin: 10px 0 15px;
+				color: var(--highlight-color);
+			}
+			p#subtitle {
+				font-size: 16px;
+				line-height: 1.6;
+				margin-bottom: 30px;
+				opacity: 0.8;
+			}
+			.spoiler {
+				margin-top: 20px;
+				text-align: left;
+				font-size: 14px;
+				opacity: 0.7;
+			}
+			.spoiler summary {
+				cursor: pointer;
+				display: inline-block;
+				padding: 5px;
+				outline: none;
+			}
+			.spoiler summary:hover {
+				opacity: 1;
+			}
+			.spoiler p {
+				margin: 10px 5px 0;
+			}
+			.spoiler code {
+				background-color: rgba(0, 0, 0, 0.3);
+				padding: 2px 6px;
+				border-radius: 4px;
+			}
+			@media (max-width: 600px) {
+				.glass-container {
+					padding: 30px 25px;
+				}
+				h1#title {
+					font-size: 24px;
+				}
+				p#subtitle {
+					font-size: 15px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="glass-container">
+			<div class="icon">⏱️</div>
+			<h1 id="title"></h1>
+			<p id="subtitle"></p>
+			<div class="spoiler">
+				<details>
+					<summary id="spoiler-summary"></summary>
+					<p>
+						<span id="ip-label"></span>
+						<code id="ip-address">::CLIENT_IP::</code>
+					</p>
+				</details>
+				<details>
+					<summary id="spoiler-summary"></summary>
+					<p>
+						<span id="ray-label"></span> <code id="ray-id">::RAY_ID::</code>
+					</p>
+				</details>
+			</div>
+		</div>
+		<script>
+			const translations = {
+				ru: {
+					title: 'Слишком много попыток',
+					subtitle:
+						'Вы совершили слишком много неудачных попыток верификации. Пожалуйста, подождите некоторое время и попробуйте снова.',
+				},
+				en: {
+					title: 'Too Many Attempts',
+					subtitle:
+						'You have made too many unsuccessful verification attempts. Please wait a while and try again.',
+				},
+			}
+			const commonTexts = {
+				ru: {
+					spoiler: 'Показать технические детали',
+					ip_label: 'Ваш IP-адрес:',
+					ray_label: 'Ваш запрос:',
+				},
+				en: {
+					spoiler: 'Show technical details',
+					ip_label: 'Your IP Address:',
+					ray_label: 'Your request:',
+				},
+			}
+			document.addEventListener('DOMContentLoaded', () => {
+				const userLang = navigator.language || navigator.userLanguage
+				const lang = ['ru', 'be', 'uk', 'ky', 'kk', 'uz', 'tg', 'tk'].includes(
+					userLang.split('-')[0]
+				)
+					? 'ru'
+					: 'en'
+				document.title = translations[lang].title
+				document.getElementById('title').textContent = translations[lang].title
+				document.getElementById('subtitle').textContent =
+					translations[lang].subtitle
+				document.getElementById('spoiler-summary').textContent =
+					commonTexts[lang].spoiler
+				document.getElementById('ip-label').textContent =
+					commonTexts[lang].ip_label
+				document.getElementById('ray-label').textContent =
+					commonTexts[lang].ray_label
+			})
+		</script>
+	</body>
+</html>
