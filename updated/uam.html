@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Completing challenge...</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--dark-1: #121212;
+				--dark-2: #1a1a1a;
+				--dark-3: #000000;
+				--text-color: #e0e0e0;
+				--highlight-color: #ffffff;
+				--glass-bg: rgba(28, 28, 28, 0.3);
+				--glass-border: rgba(255, 255, 255, 0.1);
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Inter', sans-serif;
+				color: var(--text-color);
+				background: linear-gradient(
+					45deg,
+					var(--dark-3),
+					var(--dark-1),
+					var(--dark-2)
+				);
+				background-size: 400% 400%;
+				animation: gradientBG 15s ease infinite;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				overflow: hidden;
+			}
+			@keyframes gradientBG {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			}
+			.glass-container {
+				width: 90%;
+				max-width: 450px;
+				padding: 40px;
+				background: var(--glass-bg);
+				border-radius: 20px;
+				border: 1px solid var(--glass-border);
+				backdrop-filter: blur(10px);
+				-webkit-backdrop-filter: blur(10px);
+				box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+				text-align: center;
+				transition: transform 0.4s ease, box-shadow 0.4s ease;
+			}
+			.glass-container:hover {
+				transform: scale(1.05);
+				box-shadow: 0 16px 45px 0 rgba(0, 0, 0, 0.45);
+			}
+			h1#title {
+				font-size: 24px;
+				font-weight: 600;
+				margin-bottom: 10px;
+			}
+			p#subtitle {
+				font-size: 15px;
+				line-height: 1.6;
+				margin-bottom: 25px;
+				opacity: 0.8;
+			}
+			.loader-container {
+				height: 50px;
+				margin-bottom: 20px;
+			}
+			.loader {
+				border: 4px solid rgba(255, 255, 255, 0.2);
+				border-left-color: var(--highlight-color);
+				border-radius: 50%;
+				width: 50px;
+				height: 50px;
+				animation: spin 1s linear infinite;
+				margin: 0 auto;
+			}
+			.placeholder-container {
+				width: 100%;
+				text-align: center;
+				margin-top: 15px;
+			}
+			.placeholder-label {
+				font-weight: 600;
+				margin-bottom: 5px;
+				font-size: 14px;
+				opacity: 0.7;
+			}
+			.placeholder {
+				background-color: rgba(0, 0, 0, 0.3);
+				padding: 10px;
+				border-radius: 5px;
+				word-break: break-all;
+				font-family: monospace;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+			}
+			.placeholder:hover {
+				background-color: rgba(0, 0, 0, 0.5);
+			}
+			.spoiler {
+				margin-top: 20px;
+				text-align: center;
+				font-size: 14px;
+				opacity: 0.7;
+			}
+			.spoiler summary {
+				cursor: pointer;
+				display: inline-block;
+				padding: 5px;
+				outline: none;
+			}
+			.spoiler summary:hover {
+				opacity: 1;
+			}
+			.spoiler-content {
+				padding-top: 5px;
+			}
+			@keyframes spin {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			@media (max-width: 600px) {
+				.glass-container {
+					padding: 30px 25px;
+				}
+				h1#title {
+					font-size: 22px;
+				}
+				p#subtitle {
+					font-size: 14px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="glass-container">
+			<h1 id="title"></h1>
+			<p id="subtitle"></p>
+			<div class="loader-container"><div class="loader" id="loader"></div></div>
+			<div class="spoiler">
+				<details>
+					<summary id="spoiler-summary"></summary>
+					<div class="spoiler-content">
+						<div class="placeholder-container">
+							<div class="placeholder-label" id="request-id-label"></div>
+							<div class="placeholder" id="rayid" onclick='ctc("rayid")'>
+								<span>::RAY_ID::</span>
+							</div>
+						</div>
+						<div class="placeholder-container">
+							<div class="placeholder-label" id="challenge-id-label"></div>
+							<div
+								class="placeholder"
+								id="challenge"
+								onclick='ctc("challenge")'
+							>
+								<span>::CLIENT_IP::</span>
+							</div>
+						</div>
+					</div>
+				</details>
+			</div>
+		</div>
+		<script>
+			const translations = {
+				ru: {
+					pageTitle: 'Выполняется проверка...',
+					title: 'Выполняется проверка безопасности',
+					subtitle:
+						'Процесс автоматический и не должен занять много времени. Пожалуйста, ожидайте.',
+					spoiler: 'Показать детали',
+					requestIDLabel: 'Request ID:',
+					challengeIDLabel: 'Challenge ID:',
+				},
+				en: {
+					pageTitle: 'Completing challenge...',
+					title: 'Completing security challenge',
+					subtitle:
+						"The process is automatic and shouldn't take too long. Please be patient.",
+					spoiler: 'Show Details',
+					requestIDLabel: 'Request ID:',
+					challengeIDLabel: 'Challenge ID:',
+				},
+			}
+			document.addEventListener('DOMContentLoaded', () => {
+				const userLang = navigator.language || navigator.userLanguage
+				const lang = ['ru', 'be', 'uk', 'ky', 'kk', 'uz', 'tg', 'tk'].includes(
+					userLang.split('-')[0]
+				)
+					? 'ru'
+					: 'en'
+				const texts = translations[lang]
+				document.title = texts.pageTitle
+				document.getElementById('title').textContent = texts.title
+				document.getElementById('subtitle').textContent = texts.subtitle
+				document.getElementById('spoiler-summary').textContent = texts.spoiler
+				document.getElementById('request-id-label').textContent =
+					texts.requestIDLabel
+				document.getElementById('challenge-id-label').textContent =
+					texts.challengeIDLabel
+			})
+		</script>
+	</body>
+</html>
