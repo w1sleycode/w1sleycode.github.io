@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<title id="page-title"></title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--dark-1: #121212;
+				--dark-2: #1a1a1a;
+				--dark-3: #000000;
+				--text-color: #e0e0e0;
+				--highlight-color: #ffffff;
+				--accent-color: #f39c12;
+				--glass-bg: rgba(28, 28, 28, 0.4);
+				--glass-border: rgba(255, 255, 255, 0.1);
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Inter', sans-serif;
+				color: var(--text-color);
+				background: linear-gradient(
+					45deg,
+					var(--dark-3),
+					var(--dark-1),
+					var(--dark-2)
+				);
+				background-size: 400% 400%;
+				animation: gradientBG 15s ease infinite;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				padding: 20px 0;
+			}
+			@keyframes gradientBG {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			}
+			.glass-container {
+				width: 90%;
+				max-width: 600px;
+				padding: 30px 40px;
+				background: var(--glass-bg);
+				border-radius: 20px;
+				border: 1px solid var(--glass-border);
+				backdrop-filter: blur(10px);
+				-webkit-backdrop-filter: blur(10px);
+				box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+				text-align: center;
+			}
+			.icon {
+				font-size: 56px;
+				line-height: 1;
+				margin-bottom: 10px;
+				color: var(--accent-color);
+			}
+			h1 {
+				font-size: 28px;
+				font-weight: 600;
+				margin: 0 0 10px;
+				color: var(--highlight-color);
+			}
+			p {
+				font-size: 16px;
+				line-height: 1.6;
+				margin-bottom: 20px;
+				opacity: 0.8;
+			}
+			.error-details {
+				max-height: 200px;
+				overflow-y: auto;
+				background-color: rgba(0, 0, 0, 0.3);
+				border-radius: 8px;
+				padding: 15px;
+				text-align: left;
+				font-family: monospace;
+				white-space: pre-wrap;
+				word-break: break-all;
+				border: 1px solid var(--glass-border);
+			}
+			.reload-button {
+				display: inline-block;
+				margin-top: 20px;
+				background-color: var(--accent-color);
+				color: var(--highlight-color);
+				padding: 12px 24px;
+				border: none;
+				border-radius: 8px;
+				cursor: pointer;
+				font-size: 16px;
+				font-weight: 600;
+				text-decoration: none;
+				transition: background-color 0.3s, transform 0.3s;
+			}
+			.reload-button:hover {
+				background-color: #d35400;
+				transform: translateY(-2px);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="glass-container">
+			<div class="icon">⚠️</div>
+			<h1 id="title"></h1>
+			<p id="subtitle"></p>
+			<div class="error-details">::CLOUDFLARE_ERROR_500S_BOX::</div>
+			<a
+				href="javascript:location.reload()"
+				class="reload-button"
+				id="button-text"
+			></a>
+		</div>
+		<script>
+			const translations = {
+				ru: {
+					page_title: 'Ошибка подключения',
+					title: 'Ошибка подключения к бэкенду',
+					subtitle:
+						'Не удалось установить соединение с сервером-источником. Технические детали ошибки показаны ниже.',
+					button_text: 'Перезагрузить страницу',
+				},
+				en: {
+					page_title: 'Connection Error',
+					title: 'Backend Connection Error',
+					subtitle:
+						'Could not establish a connection to the origin server. Technical error details are shown below.',
+					button_text: 'Reload Page',
+				},
+			}
+			document.addEventListener('DOMContentLoaded', () => {
+				const userLang = navigator.language || navigator.userLanguage
+				const lang = ['ru', 'be', 'uk', 'ky', 'kk', 'uz', 'tg', 'tk'].includes(
+					userLang.split('-')[0]
+				)
+					? 'ru'
+					: 'en'
+				const texts = translations[lang]
+				document.title = texts.page_title
+				document.getElementById('title').textContent = texts.title
+				document.getElementById('subtitle').textContent = texts.subtitle
+				document.getElementById('button-text').textContent = texts.button_text
+			})
+		</script>
+	</body>
+</html>
